@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8B7355">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BuJo">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css?v=4">
+  <title>BuJo</title>
+</head>
+<body>
+<div id="app">
+
+  <!-- Header -->
+  <header>
+    <div id="title-block">
+      <h1>BuJo</h1>
+      <span id="subtitle">Daily Log</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px">
+      <button id="backup-btn">保存</button>
+      <button id="legend-btn">KEY 一覧</button>
+    </div>
+  </header>
+
+  <!-- Feed -->
+  <div id="feed"></div>
+
+  <!-- Empty state -->
+  <div id="empty" style="display:none">
+    <div class="empty-sym">•</div>
+    <p>下のボタンで記録を始めましょう</p>
+  </div>
+
+  <!-- Composer -->
+  <div id="composer">
+    <div id="key-bar"></div>
+    <div id="input-row">
+      <textarea id="entry-input" rows="1" placeholder="メモを入力…"></textarea>
+      <button id="star-btn" aria-label="重要">＊</button>
+      <button id="add-btn" aria-label="追加">+</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- KEY Legend overlay -->
+<div id="legend-overlay">
+  <div id="legend-card">
+    <h2>KEY — 記号の意味</h2>
+    <div class="legend-row"><span class="sym">•</span><span class="name">タスク</span><span class="desc">やること。タップで状態変更</span></div>
+    <div class="legend-row"><span class="sym">×</span><span class="name">完了</span><span class="desc">タスク達成。再タップで未了に戻る</span></div>
+    <div class="legend-row"><span class="sym">◉</span><span class="name">完了</span><span class="desc">イベント終了。再タップで未了に戻る</span></div>
+    <div class="legend-row"><span class="sym">></span><span class="name">移行</span><span class="desc">↻ボタンで今日の新タスクとして起こせる</span></div>
+    <div class="legend-row"><span class="sym">○</span><span class="name">イベント</span><span class="desc">予定・出来事</span></div>
+    <div class="legend-row"><span class="sym">–</span><span class="name">ノート</span><span class="desc">気づき・メモ</span></div>
+    <div class="legend-row"><span class="sym">!</span><span class="name">アイデア</span><span class="desc">ひらめき・重要事項</span></div>
+    <div class="legend-row"><span class="sym">＝</span><span class="name">気分</span><span class="desc">その時の気分・体調</span></div>
+    <div class="legend-row"><span class="sym">？</span><span class="name">調べる</span><span class="desc">あとで調べたいこと</span></div>
+    <div class="legend-row"><span class="sym">◎</span><span class="name">見た</span><span class="desc">読んだ・観た・確認済み</span></div>
+    <div class="legend-row"><span class="sym">▶</span><span class="name">検討</span><span class="desc">判断を保留・検討中</span></div>
+    <button id="legend-close">閉じる</button>
+  </div>
+</div>
+
+<!-- Backup overlay -->
+<div id="backup-overlay">
+  <div id="backup-card">
+    <h2>バックアップ / 復元</h2>
+
+    <div class="backup-section">
+      <p class="backup-label">エクスポート</p>
+      <button id="export-btn">JSONファイルを保存</button>
+      <p class="backup-hint">iOSの場合：共有メニュー →「ファイルに保存」→ iCloud Drive</p>
+    </div>
+
+    <div class="backup-section">
+      <p class="backup-label">インポート（復元）</p>
+      <button id="import-btn">JSONファイルを読み込む</button>
+      <input type="file" id="import-input" accept=".json">
+      <p class="backup-hint">既存データと重複しないものだけ追加されます</p>
+    </div>
+
+    <button id="backup-close">閉じる</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script src="./app.js?v=4"></script>
+</body>
+</html>
